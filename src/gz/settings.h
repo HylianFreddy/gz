@@ -93,9 +93,10 @@ enum commands
 
 struct watch_info
 {
-  uint8_t type          : 4;
-  uint8_t anchored      : 1;
-  uint8_t position_set  : 1;
+  uint8_t  type          : 4;
+  uint8_t  anchored      : 1;
+  uint8_t  position_set  : 1;
+  uint8_t  pointer       : 1;
 };
 
 struct settings_bits
@@ -109,6 +110,7 @@ struct settings_bits
   uint32_t lag_unit         : 1;
   uint32_t timer            : 1;
   uint32_t pause_display    : 1;
+  uint32_t pointer_watches  : 1;
   uint32_t macro_input      : 1;
   uint32_t hack_oca_input   : 1;
   uint32_t hack_oca_sync    : 1;
@@ -118,6 +120,8 @@ struct settings_bits
   uint32_t break_type       : 1;
   uint32_t warp_age         : 2;
   uint32_t warp_cutscene    : 5;
+  uint32_t load_to          : 2;
+  uint32_t on_load          : 2;
   uint32_t col_view_mode    : 1;
   uint32_t col_view_xlu     : 1;
   uint32_t col_view_water   : 1;
@@ -144,6 +148,7 @@ struct settings_data
   /* order elements by size for space-efficient packing */
   z64_xyzf_t            teleport_pos[SETTINGS_TELEPORT_MAX];
   uint32_t              watch_address[SETTINGS_WATCHES_MAX];
+  uint32_t              watch_offset[SETTINGS_WATCHES_MAX];
   uint32_t              cheats;
   z64_angle_t           teleport_rot[SETTINGS_TELEPORT_MAX];
   struct settings_bits  bits;

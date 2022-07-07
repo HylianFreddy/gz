@@ -202,6 +202,12 @@ struct menu *gz_file_menu(void)
   menu_add_button(&menu, 0, 2, "call navi", call_navi_proc, NULL);
   menu_add_button(&menu, 0, 3, "load debug file", load_debug_file_proc, NULL);
 
+  /* create memfile controls */
+  menu_add_static(&menu, 0, 3, "memory file", 0xC0C0C0);
+  menu_add_watch(&menu, 19, 3, (uint32_t)&gz.memfile_slot, WATCH_TYPE_U8, 0, 0);
+  menu_add_button(&menu, 17, 3, "-", memfile_dec_proc, NULL);
+  menu_add_button(&menu, 21, 3, "+", memfile_inc_proc, NULL);
+
   /* create time of day controls */
   struct gfx_texture *t_daytime = resource_get(RES_ICON_DAYTIME);
   menu_add_static(&menu, 0, 4, "time of day", 0xC0C0C0);
